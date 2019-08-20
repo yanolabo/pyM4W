@@ -1,0 +1,34 @@
+ESP32
+
+=== basic IO ===
+IO00.i  SW1
+IO04.i  SW2
+IO16.i  SW3
+
+IO17.o  LED1
+IO05.o  LED2
+
+=== MOTOR ===
+IO15.o  MTR
+IO02.o  BRK
+IO23.p  PULSE(50% 100k)
+
+=== SPEAKER ===
+IO25.o  PTZ
+
+=== I2C ===
+IO21.i  SDA
+IO22.i  SCL
+
+=== Analog ===
+IO34.a  vLiPo
+IO35.a  vAAx2
+IO36.a  SENSOR1 .. SENSOR_VP
+IO39.a  SENSOR2 .. SENSOR_VN
+
+== gyro ==
+IO26.s  HINT
+IO27.s  HCS
+IO14.s  HCLK
+IO12.s  HMISO
+IO13.s  HMOSI

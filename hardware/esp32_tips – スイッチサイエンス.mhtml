@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0047)https://trac.switch-science.com/wiki/esp32_tips -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+      esp32_tips – スイッチサイエンス
+    </title>
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if IE]><script type="text/javascript">
+      if (/^#__msie303:/.test(window.location.hash))
+        window.location.replace(window.location.hash.replace(/^#__msie303:/, '#'));
+    </script><![endif]-->
+          <link rel="search" href="https://trac.switch-science.com/search">
+          <link rel="help" href="https://trac.switch-science.com/wiki/TracGuide">
+          <link rel="alternate" href="https://trac.switch-science.com/wiki/esp32_tips?format=txt" type="text/x-trac-wiki" title="プレーンテキスト">
+          <link rel="start" href="https://trac.switch-science.com/wiki">
+          <link rel="stylesheet" href="./esp32_tips – スイッチサイエンス_files/trac.css" type="text/css">
+          <link rel="stylesheet" href="./esp32_tips – スイッチサイエンス_files/wiki.css" type="text/css">
+          <link rel="icon" href="https://trac.switch-science.com/chrome/site/favicon.ico" type="image/x-icon">
+    
+      <link type="application/opensearchdescription+xml" rel="search" href="https://trac.switch-science.com/search/opensearch" title="スイッチサイエンス の検索">
+      <script async="" src="./esp32_tips – スイッチサイエンス_files/analytics.js"></script><script type="text/javascript" charset="utf-8" src="./esp32_tips – スイッチサイエンス_files/jquery.js"></script>
+      <script type="text/javascript" charset="utf-8" src="./esp32_tips – スイッチサイエンス_files/babel.js"></script>
+      <script type="text/javascript" charset="utf-8" src="./esp32_tips – スイッチサイエンス_files/ja.js"></script>
+      <script type="text/javascript" charset="utf-8" src="./esp32_tips – スイッチサイエンス_files/trac.js"></script>
+      <script type="text/javascript" charset="utf-8" src="./esp32_tips – スイッチサイエンス_files/search.js"></script>
+      <script type="text/javascript" charset="utf-8" src="./esp32_tips – スイッチサイエンス_files/folding.js"></script>
+    <script type="text/javascript">
+      jQuery("#trac-noscript").remove();
+      jQuery(document).ready(function($) {
+        $(".trac-autofocus").focus();
+        $(".trac-target-new").attr("target", "_blank");
+        if ($.ui) { /* is jquery-ui added? */
+          $(".trac-datepicker:not([readonly])").prop("autocomplete", "off").datepicker();
+          $(".trac-datetimepicker:not([readonly])").prop("autocomplete", "off").datetimepicker();
+          $("#main").addClass("trac-nodatetimehint");
+        }
+        $(".trac-disable").disableSubmit(".trac-disable-determinant");
+        setTimeout(function() { $(".trac-scroll").scrollToTop() }, 1);
+        $(".trac-disable-on-submit").disableOnSubmit();
+      });
+    </script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("#content").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $("#content").find(".wikianchor").each(function() {
+          $(this).addAnchor(babel.format(_("Link to #%(id)s"), {id: $(this).attr('id')}));
+        });
+        $(".foldable").enableFolding(true, true);
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="./esp32_tips – スイッチサイエンス_files/style.css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://trac.switch-science.com/"><img src="./esp32_tips – スイッチサイエンス_files/logo.gif" alt="スイッチサイエンス" height="37" width="380"></a>
+      </div>
+      <form id="search" action="https://trac.switch-science.com/search" method="get">
+        <div>
+          <label for="proj-search">検索:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="">
+          <input type="submit" value="検索">
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="https://trac.switch-science.com/login">ログイン</a></li><li><a href="https://trac.switch-science.com/prefs">個人設定</a></li><li><a href="https://trac.switch-science.com/wiki/TracGuide">ヘルプ/ガイド</a></li><li class="last"><a href="https://trac.switch-science.com/about">Trac について</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first active"><a href="https://trac.switch-science.com/wiki">Wiki</a></li><li><a href="https://trac.switch-science.com/timeline">タイムライン</a></li><li><a href="https://trac.switch-science.com/roadmap">ロードマップ</a></li><li><a href="https://trac.switch-science.com/report">チケットを見る</a></li><li class="last"><a href="https://trac.switch-science.com/search">検索</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="pagepath" class="noprint">
+  <a class="pathentry first" title="WikiStart の表示" href="https://trac.switch-science.com/wiki">wiki:</a><a class="pathentry" href="https://trac.switch-science.com/wiki/esp32_tips" title="esp32_tips の表示">esp32_tips</a>
+</div>
+      <div id="ctxtnav" class="nav">
+        <h2>コンテキストナビゲーション</h2>
+        <ul>
+          <li class="first"><a href="https://trac.switch-science.com/wiki/WikiStart">スタートページ</a></li><li><a href="https://trac.switch-science.com/wiki/TitleIndex">ページ一覧</a></li><li class="last"><a href="https://trac.switch-science.com/wiki/esp32_tips?action=history">履歴</a></li>
+        </ul>
+        <hr>
+      </div>
+    <div id="content" class="wiki">
+      <div class="wikipage searchable">
+        
+          <div id="wikipage" class="trac-content"><h1 id="ESP-WROOM-32に関するTIPS">ESP-WROOM-32に関するTIPS<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#ESP-WROOM-32%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8BTIPS" title="このセクションににリンクする"> ¶</a></h1>
+<p>
+<a style="padding:0; border:none" href="https://trac.switch-science.com/attachment/wiki/esp32_tips/3210_1.JPG"><img src="./esp32_tips – スイッチサイエンス_files/3210_1.JPG"></a>
+</p>
+<p>
+ESP-WROOM-32は、Xtensa Dual-Core 32-bit LX6 マイクロプロセッサを搭載する、上海のESPRESSIF社が開発した無線モジュールです。WiFiとBluetooth v4.2に対応しています。 開発ボードはスイッチサイエンスでも販売されている<a class="ext-link" href="https://www.switch-science.com/catalog/3210/"><span class="icon">​</span>ESPr Developer 32</a>の他にも、ESPRESSIF社からESP32-DevKitCなどが発売さています。
+</p>
+<p>
+本ページでは、無線モジュール ESP-WROOM-32の各種機能をArduinoとして使うにあたってのサンプルスケッチや注意点などを解説します。
+ESP32と呼ぶときはコントローラーそのもの、無線モジュール全体を指すときはESP-WROOM-32と記述しています。
+</p>
+<p>
+ESP-WROOM-32は本記事執筆時点(2017/4~5月)でも頻繁にライブラリにアップデートがあります。記事中の内容は最新の状態とは異なる場合があるため注意してください。特に、GitHubのコードの特定行への参照は古いものの可能性が高くなっています。
+</p>
+<p>
+<strong>本ページで解説しているピン設定はスイッチサイエンスの<a class="ext-link" href="https://www.switch-science.com/catalog/3210/"><span class="icon">​</span>ESPr® Developer 32</a>を想定しています。他社製開発ボードでは異なる場合があるため注意してください</strong>
+</p>
+<p>
+詳しくは<a class="ext-link" href="https://github.com/espressif/arduino-esp32/tree/master/variants"><span class="icon">​</span>ボートの別種</a>から適宜読み替えてください。ESPr Developer 32は標準の開発ボード(varaiants/esp32/)とピン配列はおなじになっています。
+</p>
+<h2 id="資料について">資料について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E8%B3%87%E6%96%99%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" title="このセクションににリンクする"> ¶</a></h2>
+<ul><li><a class="ext-link" href="https://espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"><span class="icon">​</span>ESP32 Datasheet(PDF)</a>
+一番基本的なデータシートです。
+</li><li><a class="ext-link" href="https://espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf"><span class="icon">​</span>ESP32 Technical Reference Manual(PDF)</a>
+ブロック図、レジスタなどの解説が含まれるテクニカルリファレンスマニュアルです。
+</li><li><a class="ext-link" href="http://espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf"><span class="icon">​</span>ESP32 Hardware Design Guidelines(PDF)</a>
+ESP-WROOM-32モジュールやDevkitCのハードウェアデザインガイドラインです。
+</li></ul><hr>
+<h2 id="ESP-WROOM-32のピンアサイン">ESP-WROOM-32のピンアサイン<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#ESP-WROOM-32%E3%81%AE%E3%83%94%E3%83%B3%E3%82%A2%E3%82%B5%E3%82%A4%E3%83%B3" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+以下は<a class="ext-link" href="https://espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf"><span class="icon">​</span>ESP32 Datasheet(PDF)</a>より抜粋。
+</p>
+<table class="wiki">
+<tbody><tr><td><strong>Name</strong></td><td><strong>No.</strong></td><td><strong>Type</strong></td><td><strong>Function</strong>
+</td></tr><tr><td>GND</td><td>1</td><td>P</td><td>Ground
+</td></tr><tr><td>3V3</td><td>2</td><td>P</td><td>Power supply.
+</td></tr><tr><td>EN</td><td>3</td><td>I</td><td>Chip-enable  signal. Active high.
+</td></tr><tr><td>SENSOR_VP</td><td>4</td><td>I</td><td>GPIO36, SENSOR_VP, ADC_H, ADC1_CH0, RTC_GPIO0
+</td></tr><tr><td>SENSOR_VN</td><td>5</td><td>I</td><td>GPIO39, SENSOR_VN, ADC1_CH3, ADC_H, RTC_GPIO3
+</td></tr><tr><td>IO34</td><td>6</td><td>I</td><td>GPIO34, ADC1_CH6, RTC_GPIO4
+</td></tr><tr><td>IO35</td><td>7</td><td>I</td><td style="text-align: left">GPIO35, ADC1_CH7, RTC_GPIO5, 
+</td></tr><tr><td>IO32</td><td>8</td><td>I/O</td><td style="text-align: left">GPIO32, XTAL_32K_P (32.768  kHz crystal oscillator input), ADC1_CH4, TOUCH9, RTC_GPIO9, 
+</td></tr><tr><td>IO33</td><td>9</td><td>I/O</td><td>GPIO33, XTAL_32K_N (32.768 kHz crystal oscillator output), ADC1_CH5,TOUCH8, RTC_GPIO8
+</td></tr><tr><td>IO25</td><td>10</td><td>I/O</td><td>GPIO25, DAC_1, ADC2_CH8, RTC_GPIO6, EMAC_RXD0
+</td></tr><tr><td>IO26</td><td>11</td><td>I/O</td><td>GPIO26, DAC_2, ADC2_CH9, RTC_GPIO7, EMAC_RXD1
+</td></tr><tr><td>IO27</td><td>12</td><td>I/O</td><td>GPIO27, ADC2_CH7, TOUCH7, RTC_GPIO17, EMAC_RX_DV, GPIO14,    ADC2_CH6,   TOUCH6,   RTC_GPIO16,   MTMS,  HSPICLK,
+</td></tr><tr><td>IO14</td><td>13</td><td>I/O</td><td>HS2_CLK, SD_CLK, EMAC_TXD2, GPIO12,  ADC2_CH5, TOUCH5, RTC_GPIO15,  MTDI, HSPIQ,
+</td></tr><tr><td>IO12</td><td>14</td><td>I/O</td><td>HS2_DATA2, SD_DATA2, EMAC_TXD3
+</td></tr><tr><td>GND</td><td>15</td><td>P</td><td>Ground, GPIO13,  ADC2_CH4, TOUCH4, RTC_GPIO14,  MTCK,   HSPID,
+</td></tr><tr><td>IO13</td><td>16</td><td>I/O</td><td>HS2_DATA3, SD_DATA3, EMAC_RX_ER
+</td></tr><tr><td><span class="underline">SHD/SD2*</span></td><td>17</td><td>I/O</td><td>GPIO9, SD_DATA2, SPIHD, HS1_DATA2, U1RXD
+</td></tr><tr><td><span class="underline">SWP/SD3*</span></td><td>18</td><td>I/O</td><td>GPIO10, SD_DATA3, SPIWP, HS1_DATA3, U1TXD
+</td></tr><tr><td><span class="underline">SCS/CMD*</span></td><td>19</td><td>I/O</td><td>GPIO11, SD_CMD, SPICS0, HS1_CMD, U1RTS
+</td></tr><tr><td><span class="underline">SCK/CLK*</span></td><td>20</td><td>I/O</td><td>GPIO6, SD_CLK, SPICLK, HS1_CLK, U1CTS
+</td></tr><tr><td><span class="underline">SDO/SD0*</span></td><td>21</td><td>I/O</td><td>GPIO7, SD_DATA0, SPIQ, HS1_DATA0, U2RTS
+</td></tr><tr><td><span class="underline">SDI/SD1*</span></td><td>22</td><td>I/O</td><td>GPIO8, SD_DATA1, SPID, HS1_DATA1, U2CTS, GPIO15,    ADC2_CH3,   TOUCH3,   MTDO,  HSPICS0,    RTC_GPIO13,
+</td></tr><tr><td>IO15</td><td>23</td><td>I/O</td><td>HS2_CMD, SD_CMD, EMAC_RXD3, GPIO2,  ADC2_CH2,  TOUCH2,  RTC_GPIO12,  HSPIWP,  HS2_DATA0,
+</td></tr><tr><td>IO2</td><td>24</td><td>I/O</td><td>SD_DATA0, GPIO0,  ADC2_CH1, TOUCH1, RTC_GPIO11,  CLK_OUT1,
+</td></tr><tr><td>IO0</td><td>25</td><td>I/O</td><td>EMAC_TX_CLK, GPIO4,  ADC2_CH0,  TOUCH0,  RTC_GPIO10,  HSPIHD,  HS2_DATA1,
+</td></tr><tr><td>IO4</td><td>26</td><td>I/O</td><td>SD_DATA1, EMAC_TX_ER
+</td></tr><tr><td>IO16</td><td>27</td><td>I/O</td><td>GPIO16, HS1_DATA4, U2RXD, EMAC_CLK_OUT
+</td></tr><tr><td>IO17</td><td>28</td><td>I/O</td><td>GPIO17, HS1_DATA5, U2TXD, EMAC_CLK_OUT_180
+</td></tr><tr><td>IO5</td><td>29</td><td>I/O</td><td>GPIO5, VSPICS0, HS1_DATA6, EMAC_RX_CLK
+</td></tr><tr><td>IO18</td><td>30</td><td>I/O</td><td>GPIO18, VSPICLK, HS1_DATA7
+</td></tr><tr><td>IO19</td><td>31</td><td>I/O</td><td>GPIO19, VSPIQ, U0CTS, EMAC_TXD0
+</td></tr><tr><td>NC</td><td>32</td><td>-</td><td>-
+</td></tr><tr><td>IO21</td><td>33</td><td>I/O</td><td>GPIO21, VSPIHD, EMAC_TX_EN
+</td></tr><tr><td>RXD0</td><td>34</td><td>I/O</td><td>GPIO3, U0RXD, CLK_OUT2
+</td></tr><tr><td>TXD0</td><td>35</td><td>I/O</td><td>GPIO1, U0TXD, CLK_OUT3, EMAC_RXD2
+</td></tr><tr><td>IO22</td><td>36</td><td>I/O</td><td>GPIO22, VSPIWP, U0RTS, EMAC_TXD1
+</td></tr><tr><td>IO23</td><td>37</td><td>I/O</td><td>GPIO23, VSPID, HS1_STROBE
+</td></tr><tr><td>GND</td><td>38</td><td>P</td><td>Ground
+</td></tr><tr><td>GND</td><td>39</td><td>P</td><td>Ground
+</td></tr></tbody></table>
+<p>
+*がついているピン(GPIO6~11)はモジュール内部でSPIフラッシュメモリに接続されているため、他の用途での利用は推奨されません。また、後述するピンマトリクス機能においても、GPIO6~11を別の機能に割り当てることは推奨されません。
+</p>
+<h2 id="ESPrDeveloper32のピンアサインについて">ESPr Developer 32のピンアサインについて<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#ESPrDeveloper32%E3%81%AE%E3%83%94%E3%83%B3%E3%82%A2%E3%82%B5%E3%82%A4%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+詳細な機能を省いた簡易版について画像を作成しました。
+</p>
+<p>
+<a style="padding:0; border:none" href="https://trac.switch-science.com/attachment/wiki/esp32_tips/pinout_v0_2.png"><img src="./esp32_tips – スイッチサイエンス_files/pinout_v0_2.png"></a>
+</p>
+<p>
+<a href="http://trac.switch-science.com/attachment/wiki/esp32_tips/pinout_v0_2.pdf">pdf版</a>
+</p>
+<h2 id="GPIOマトリクス機能について">GPIOマトリクス機能について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#GPIO%E3%83%9E%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+各種ペリフェラルを説明する前に、本機能について少し説明します。Arduinoからは離れた話なので、Arduinoとして少し使うぶんには気にしなくとも問題ありません。詳細については、説明しきれない部分が多いため、以下の資料を御覧ください。
+</p>
+<p>
+<a class="ext-link" href="https://espressif.com/sites/default/files/documentation/esp32_pinout_v1_0.pdf"><span class="icon">​</span>ESP32 Pinout</a>の<code>Note.12</code>にある通り、内蔵ペリフェラル用の信号は設定によって好きなピンに再割り当てすることが可能です。
+</p>
+<p>
+回路ブロック図に関しては、<a class="ext-link" href="https://espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf"><span class="icon">​</span>ESP32 Technical Reference Manual</a>の<code>4. IO_MUX and GPIO Matrix</code>が詳しいです。
+</p>
+<p>
+ESP32には｢(物理的な)ピン｣｢IO MUX(マルチプレクサ)｣｢GPIO マトリックス｣という3つの回路があります。ピンに対してはIO MUXが接続されています。一つのピンは内蔵機能またはGPIOとして割り当てる事ができます。これをIO MUXにて行います。
+</p>
+<p>
+IO MUXにてGPIOに割り当てられたピンは、GPIO マトリックスにて機能の割り当てを行うことができます。GPIOマトリックスは、入力と出力を文字通り自由に組み替えら得れる回路になっており、ピンへの入力を内蔵ペリフェラルピンに割り当てたり、逆にペリフェラルピンを出力ピンに接続したりできます。
+</p>
+<p>
+このGPIOマトリックスにて操作できるものは、基本的に内蔵ペリフェラルほぼ全てです。よって、他のデバイスとのコミュニケーションにはおおよそ好きなピンを利用することができます。
+</p>
+<p>
+ただし、以下の制約があります。
+</p>
+<ul><li>GPIO 34~39 ピンは出力には使えない
+</li><li>GPIO 0,2 ピンは回路的にブートモードの設定に利用されることがあり、実際ほぼこの通り使われていると考えます
+</li><li>GPIO 1,3 ピンは回路的にUART通信(U0RXD、U0TXD)に利用されることがあり、実際ほぼこの通り使われていると考えます
+</li><li>GPIO 12 は内蔵LDOの電圧設定に利用されることがある
+</li><li>GPIO 15 はU0TXDピンのデバッグログの設定に利用されることがある
+</li><li>Ethernet, SDIO, SPI, JTAG, UARTなどの高速信号は、パフォーマンス低下を回避するためにGPIOマトリクスを介さないで接続可能なものがあり、その場合は出力ピンが固定される
+</li><li>GPIO 6~11 はESP-WROOM-32モジュール内部では既にFLASHメモリと接続されている
+</li></ul><p>
+特に、GPIO 0,1,2,3に関しては電圧を固定してしまうと以降ArduinoIDEなどからのスケッチの書き込みができなくなるため、注意が必要です。更には、ESP-WROOM-32モジュールには内蔵FLASHメモリのために幾つかの回路が配線済みであるため、SDIO Slaveの機能やParallel QSPIといった機能は使えません。
+</p>
+<h2 id="SPI通信">SPI通信<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#SPI%E9%80%9A%E4%BF%A1" title="このセクションににリンクする"> ¶</a></h2>
+<h4 id="内部の仕様について">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+ESP-WROOM-32に搭載されているコントローラーにはSPIモジュールが3つ内蔵されています。それぞれ、
+</p>
+<ul><li>SPI
+</li><li>HSPI
+</li><li>VSPI
+</li></ul><p>
+の名称がつけられています。このうち、SPIに関しては上記ピンアサインの項目の通りFSPIとして内蔵FLASHとの接続に使われています。よって、普段周辺機器を接続する際にはHSPIもしくはVSPIの回路を利用することになります。この2つに関しては、SlaveとMasterどちらも利用可能です。
+</p>
+<p>
+一方で、ArduinoのSPIライブラリは、<a class="ext-link" href="https://github.com/espressif/arduino-esp32/blob/3cbc405edf2448cf1d77b0a30a5e62ddab806a85/libraries/SPI/src/SPI.cpp#L277"><span class="icon">​</span>ライブラリ中</a>に定義されるように、VSPI回路を利用します。更に、独自にSPIクラスをインスタンス化すると、<a class="ext-link" href="https://github.com/espressif/arduino-esp32/blob/3cbc405edf2448cf1d77b0a30a5e62ddab806a85/libraries/SPI/src/SPI.h#L53"><span class="icon">​</span>こちら</a>にあるようにHSPIが利用されます。例えば、<code>SPIclass SPI2;</code>とやると、<code>SPI2</code>インスタンスはHSPI回路を利用し、標準の<code>SPI</code>インスタンスとは別の回路で動きます。
+</p>
+<p>
+各SPIモジュールのピンアサインは以下の通りです。ただし、GPIOマトリックスの項目で説明した通り、比較的自由にリマッピング可能です。
+</p>
+<ul><li>HSPI - SCK,MISO,MOSI,SS = 14,12,13,15
+</li><li>VSPI - SCK,MISO,MOSI,SS = 18,19,23,5
+</li></ul><p>
+ピンを指定するときは、<code>SPI.begin(SCK, MISO, MOSI, SS);</code>というふうに引数を指定します。
+</p>
+<h4 id="サンプルスケッチ">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%81" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+以上の仕様と、GPIOマトリックス機能を合わせると、ものによってはブレッドボードに上手く挿すだけでジャンパワイヤなしに通信が可能です。
+</p>
+<p>
+以下のサンプルスケッチは、液晶モジュールとの通信をジャンパワイヤなしに行うというものです。
+</p>
+<p>
+<a class="ext-link" href="https://github.com/SWITCHSCIENCE/samplecodes/tree/master/ESPr_Developer_32/ESP32_SPI_MUX"><span class="icon">​</span>ESPr® Developer 32 向けSPI通信サンプルスケッチ </a>(Github)
+</p>
+<h2 id="I2C通信">I<sup>2</sup>C通信<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#I2C%E9%80%9A%E4%BF%A1" title="このセクションににリンクする"> ¶</a></h2>
+<h4 id="内部の仕様について1">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A61" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+SPI通信と同じく、内蔵回路は2つ(I2C0とI2C1)あります。基本的なピンアサインは以下のとおりです。
+</p>
+<ul><li>I2C0 - SDA,SCL = 21,22
+</li><li>I2C1 - 未定義
+</li></ul><p>
+未定義、というのも、I<sup>2</sup>C通信の回路のSDA、SCLピンはGPIOマトリクスのみに接続されているため、IO MUXに直結(=高速通信のために物理ピンに直結)していません。GPIOマトリクス経由で自由に再マッピングできます。もしI2C1回路を使う場合は、<a class="ext-link" href="https://github.com/espressif/arduino-esp32/blob/3cbc405edf2448cf1d77b0a30a5e62ddab806a85/libraries/Wire/src/Wire.cpp#L214"><span class="icon">​</span>このあたり</a>を参考に、<code>Towire Wire2(1);</code>などと宣言すると良さそうです。
+</p>
+<p>
+ピンを指定するときは<code>Wire.begin(SDA, SCK);</code>もしくは<code>Wire.begin(SDA, SCL, FREQ);</code>というふうに引数を指定します。<code>FREQ</code>は<code>uint32_t</code>型の動作周波数で、標準では100kHzです。
+</p>
+<h4 id="サンプルスケッチ1">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%811" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+SPI通信のときと同じように、ものによってはブレッドボードに上手く挿すだけでジャンパワイヤなしに通信が可能です。
+</p>
+<p>
+以下のサンプルスケッチは、温度センサとの通信をジャンパワイヤなしに行うというものです。
+</p>
+<p>
+<a class="ext-link" href="https://github.com/SWITCHSCIENCE/samplecodes/tree/master/ESPr_Developer_32/ESP32_I2C_MUX"><span class="icon">​</span>ESPr® Developer 32 向けI2C通信サンプルスケッチ</a>(Github)
+</p>
+<h2 id="GPIO">GPIO<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#GPIO" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+基本的に一般的なArduinoと同じです。3.3V動作であり5Vトレラントでない点、および他のマトリクス機能との衝突を起こす可能性がある点に注意すると良いです。
+</p>
+<h4 id="サンプルスケッチ2">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%812" title="このセクションににリンクする"> ¶</a></h4>
+<h2 id="ADCアナログ入力">ADC(アナログ入力)<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#ADC%E3%82%A2%E3%83%8A%E3%83%AD%E3%82%B0%E5%85%A5%E5%8A%9B" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+ADCに使えるピンを以下の表に示します。
+</p>
+<table class="wiki">
+<tbody><tr><td>定数</td><td>GPIOピン
+</td></tr><tr><td>A0</td><td>36
+</td></tr><tr><td>A3</td><td>39
+</td></tr><tr><td>A4</td><td>32
+</td></tr><tr><td>A5</td><td>33
+</td></tr><tr><td>A6</td><td>34
+</td></tr><tr><td>A7</td><td>35
+</td></tr><tr><td>A10</td><td>4
+</td></tr><tr><td>A11</td><td>0
+</td></tr><tr><td>A12</td><td>2
+</td></tr><tr><td>A13</td><td>15
+</td></tr><tr><td>A14</td><td>13
+</td></tr><tr><td>A15</td><td>12
+</td></tr><tr><td>A16</td><td>14
+</td></tr><tr><td>A17</td><td>27
+</td></tr><tr><td>A18</td><td>25
+</td></tr><tr><td>A19</td><td>26
+</td></tr></tbody></table>
+<p>
+※A1,A2は定義されていません。本来ならGPIO37、38ピンで利用できますが、後述するLow-Noise Amplifier回路を利用するためにすでに部品が配線されています。
+※GPIO0、2に関しては書き込みモードの制御、GPIO15,12も他の機能で使われることがあります。
+</p>
+<h4 id="内部の仕様について2">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A62" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+ESP32には逐次比較型(SAR)ADCモジュールが2つ内蔵されています。分解能は9～12bitで、デフォルトは12bitです。(<a class="ext-link" href="https://github.com/espressif/arduino-esp32/blob/3cbc405edf2448cf1d77b0a30a5e62ddab806a85/cores/esp32/esp32-hal-adc.h#L43"><span class="icon">​</span>参照</a>)
+</p>
+<p>
+SAR ADC1 には、GPIO32~39に相当するピンと、後述するホールセンサが接続されています。
+</p>
+<p>
+SAR ADC2 には、それ以外のピンと、deep sleep機能用の入力などが接続されています。
+</p>
+<p>
+また、ADCの入力には減衰器を設定することができます。実のところ、ESP32のADCモジュールは0～1 Vの間でAD変換を行っています。このモジュールに例えば11db(約1/3.6倍)の減衰器を設定することで、0～3.6 Vの間のAD変換ができるようになります。
+</p>
+<p>
+デフォルトでは11dBの減衰が設定され、12bitでの最大値は3.6 Vを示しています。
+また、現在AD変換の結果は少し誤差があるとのことです(<a class="ext-link" href="https://esp32.com/viewtopic.php?f=12&amp;t=1045"><span class="icon">​</span>公式スレッド参照</a>)。
+他にも議論が見受けられ(<a class="ext-link" href="https://github.com/espressif/arduino-esp32/issues/92"><span class="icon">​</span>例1</a>,<a class="ext-link" href="https://github.com/espressif/esp-idf/issues/164"><span class="icon">​</span>例2</a>)、状況によって値が変わる可能性がある点に注意したほうが良いでしょう。
+</p>
+<p>
+このADCの補正に関しては色々議論が進んでいるようです。参考情報として、電源電圧3.31 VでA0ピン(GPIO36)に1.667 Vを入力した時のADCの値は、1950程度でした。値が4095の時3.50 Vになる計算です。この値も何度かのアップデートで変わっている可能性があります。
+</p>
+<p>
+setupのブロックで<code>analogSetAttenuation()</code>関数を呼ぶことで減衰率の設定ができます。例えば減衰無し(入力電圧範囲 0～1 V)であれば、<code>analogSetAttenuation(ADC_0db);</code>と設定します。詳しくは<a class="ext-link" href="https://github.com/espressif/arduino-esp32/blob/3cbc405edf2448cf1d77b0a30a5e62ddab806a85/cores/esp32/esp32-hal-adc.h#L86"><span class="icon">​</span>このあたり</a>を参照ください。
+</p>
+<p>
+また、ADC2回路を利用するピンは、今のところWiFi機能と並行して利用できず、常に値が4095になります(<a class="ext-link" href="https://github.com/espressif/arduino-esp32/issues/102"><span class="icon">​</span>参照</a>)。将来的に修正するようですが、注意してください。
+</p>
+<h4 id="サンプルスケッチ3">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%813" title="このセクションににリンクする"> ¶</a></h4>
+<h2 id="DACアナログ出力">DAC(アナログ出力)<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#DAC%E3%82%A2%E3%83%8A%E3%83%AD%E3%82%B0%E5%87%BA%E5%8A%9B" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+いわゆるArduinoUNOなどで実行する<code>analogWrite()</code>ではなく、ArduinoDUEのDACピンのようにアナログ電圧が直接ピンから出てくる機能です。
+</p>
+<h4 id="内部の仕様について3">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A63" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+ESP32は2chの8bit DACを内蔵しています。出力ピンはGPIO25,26ピンの位置に固定されています。
+</p>
+<table class="wiki">
+<tbody><tr><td>定数</td><td>GPIOピン
+</td></tr><tr><td>DAC1</td><td>25
+</td></tr><tr><td>DAC2</td><td>26
+</td></tr></tbody></table>
+<p>
+<code>dacWrite(pin, value)</code>と引数を渡します。pinはDAC1,DAC2を指定します。valueは0から255までの値です。
+</p>
+<h4 id="サンプルスケッチ4">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%814" title="このセクションににリンクする"> ¶</a></h4>
+<h2 id="PWM等">PWM等<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#PWM%E7%AD%89" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+特にLEDC機能を利用する場合、いわゆるArduinoUNOの<code>analogWrite()</code>と同様の振る舞いをします。つまり、LED調光などを想定した一般的なPWMということです。SigmaDelta変調に関しての詳細な説明は省きます。
+</p>
+<h4 id="内部の仕様について4">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A64" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+SigmaDelta変調に関しては、0~7の8ch、1220~312500 Hz の範囲で動作可能の模様です。IO MUX経由で物理ピンにアタッチして使います。この際、特に推奨されるピンはありません。IO MUX内部では<code>gpio_sdX_out</code>という呼称で扱われています。
+</p>
+<p>
+LEDC機能は、0~15の16chです。
+</p>
+<p>
+余談ですが、現在はtone関数は利用できません。代替機能として、<code>ledcWriteTone(ch, 440);</code>と関数を呼ぶと、chにアタッチされたピンに440Hzで矩形波が出力されます。
+</p>
+<p>
+更には、<code>ledcWriteNote(ch, NOTE_A, 4);</code>と関数を呼ぶと、chにアタッチされたピンにラの音を第4オクターブの高さで鳴らすことができます。つまり440Hzの矩形波が出力されます。
+音階は<code>hardware\espressif\esp32\cores\esp32\esp32-hal-ledc.h</code>において
+</p>
+<pre class="wiki">typedef enum {
+    NOTE_C, NOTE_Cs, NOTE_D, NOTE_Eb, NOTE_E, NOTE_F, NOTE_Fs, NOTE_G, NOTE_Gs, NOTE_A, NOTE_Bb, NOTE_B, NOTE_MAX
+} note_t;
+</pre><p>
+と定義されています。
+</p>
+<h4 id="サンプルスケッチ5">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%815" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+LED C機能を使ったサンプルスケッチがexamplesにあります。<a class="ext-link" href="https://github.com/espressif/arduino-esp32/tree/master/libraries/ESP32/examples/AnalogOut/LEDCSoftwareFade"><span class="icon">​</span>LEDCSoftwareFade</a>という名前です。
+</p>
+<p>
+SigmaDelta変調を使ったサンプルスケッチもexamplesにあります。<a class="ext-link" href="https://github.com/espressif/arduino-esp32/tree/master/libraries/ESP32/examples/AnalogOut/SigmaDelta"><span class="icon">​</span>SigmaDelta</a>という名前です。
+</p>
+<h2 id="ホールセンサ">ホールセンサ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%83%9B%E3%83%BC%E3%83%AB%E3%82%BB%E3%83%B3%E3%82%B5" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+ESP32にはホールセンサ(磁気センサー)が内蔵されています。自由度は1です。
+</p>
+<h4 id="内部の仕様について5">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A65" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+ホール効果によって発生する電圧を先のADC回路にて読み取っています。生じる電圧は小さいので、内蔵のLow-Noise Amplifierを利用することが回路的には可能ですが、Arduinoライブラリではサポート外のようです。(<a class="ext-link" href="https://github.com/espressif/arduino-esp32/blob/3cbc405edf2448cf1d77b0a30a5e62ddab806a85/cores/esp32/esp32-hal-adc.h#L86"><span class="icon">​</span>参照</a>)
+</p>
+<p>
+ホールセンサの出力は、内蔵LNAに接続されている、つまりGPIO36,37(SENSOR_VP,SENSOR_VN)につながっているため、他の回路とは基本的に排他利用となっています。
+</p>
+<h4 id="サンプルスケッチ6">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%816" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+サンプルスケッチは<a class="ext-link" href="https://github.com/espressif/arduino-esp32/tree/master/libraries/ESP32/examples/HallSensor"><span class="icon">​</span>HallsSensor</a>という名前で用意されています。
+</p>
+<p>
+磁石を近づけたり遠ざけたりした時の実行例
+</p>
+<p>
+<a style="padding:0; border:none" href="https://trac.switch-science.com/attachment/wiki/esp32_tips/hall.png"><img width="25%" src="./esp32_tips – スイッチサイエンス_files/hall.png"></a>
+</p>
+<h2 id="温度センサー">温度センサー<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E6%B8%A9%E5%BA%A6%E3%82%BB%E3%83%B3%E3%82%B5%E3%83%BC" title="このセクションににリンクする"> ¶</a></h2>
+<h4 id="内部の仕様について6">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A66" title="このセクションににリンクする"> ¶</a></h4>
+<h4 id="サンプルスケッチ7">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%817" title="このセクションににリンクする"> ¶</a></h4>
+<h2 id="タッチセンサ">タッチセンサ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%BF%E3%83%83%E3%83%81%E3%82%BB%E3%83%B3%E3%82%B5" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+タッチセンサとして使える入力を以下に示します。
+</p>
+<table class="wiki">
+<tbody><tr><td>定数</td><td>GPIOピン
+</td></tr><tr><td>T0</td><td>4
+</td></tr><tr><td>T1</td><td>0
+</td></tr><tr><td>T2</td><td>2
+</td></tr><tr><td>T3</td><td>15
+</td></tr><tr><td>T4</td><td>13
+</td></tr><tr><td>T5</td><td>12
+</td></tr><tr><td>T6</td><td>14
+</td></tr><tr><td>T7</td><td>27
+</td></tr><tr><td>T8</td><td>33
+</td></tr><tr><td>T9</td><td>32
+</td></tr></tbody></table>
+<p>
+例によってGPIO0,2はブート設定で使われることがあったり、GPIO15はデバッグログの設定ピンだったり、GPIO32,33はクリスタル用(ESPr 32だと基板裏面に配置)であったりするため、利用するピンには気をつけなれけばいけません。
+</p>
+<p>
+<code>touchRead(T0)</code> とすることで値が帰ってきます。この値は、ピンに触っているときとそうでないときで大きく異なるので、これを利用してタッチ判定ができます。
+</p>
+<h4 id="内部の仕様について7">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A67" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+ピンに対して少し信号を出力した直後にピンの状態を読み取ることで、容量性の負荷が接続されているかどうかを見ています。現在ADCがWiFiと共存できないという仕様がありますが、タッチセンサとはせず使うことができます。
+</p>
+<h4 id="サンプルスケッチ8">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%818" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+<a class="ext-link" href="https://github.com/espressif/arduino-esp32/tree/master/libraries/ESP32/examples/Touch"><span class="icon">​</span>いくつか公式でサンプルスケッチが用意されている</a>ので、書き込むことで動作確認ができます。
+</p>
+<h2 id="ULPコプロセッサとdeepsleep">ULP コプロセッサとdeep sleep<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#ULP%E3%82%B3%E3%83%97%E3%83%AD%E3%82%BB%E3%83%83%E3%82%B5%E3%81%A8deepsleep" title="このセクションににリンクする"> ¶</a></h2>
+<p>
+ESP32はデュアルコアですが、これらとは別に低消費電力用にもう一つプロセッサを載せています。これをULP コプロセッサなどと呼びます。スイッチサイエンスのESPr Developerの基板裏面に存在するクリスタル用のパッドはこの機能向けに設けられているため、関連事項として説明します。
+</p>
+<p>
+ただ、Arduino IDEから利用する分にはほぼ気にする必要がありません。まず、現在のところこのコプロセッサのプログラミングはアセンブラで行う必要があります。
+</p>
+<p>
+詳しくは<a class="ext-link" href="https://esp-idf.readthedocs.io/en/latest/api-guides/ulp.html"><span class="icon">​</span>esp-idfのプログラミングガイド</a>や<a class="ext-link" href="https://github.com/espressif/esp-idf/tree/master/examples/system/ulp"><span class="icon">​</span>esp-idfのサンプルプログラム</a>をご覧ください。
+</p>
+<h4 id="内部の仕様について8">内部の仕様について<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E5%86%85%E9%83%A8%E3%81%AE%E4%BB%95%E6%A7%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A68" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+ULPコプロセッサは、RTCと呼ばれる一連の内部一つの機能として呼称されます。他には、PMU(電源)、RTCリカバリメモリが存在します。
+</p>
+<p>
+このRTCメモリは2種類存在し、それぞれFASTメモリとSLOWメモリと呼ばれます。どちらも8KBのSRAMです。(ちなみに本体スペックの520KBのうち8KBはこのFASTメモリのことを指します)
+</p>
+<p>
+FASTメモリははデータストレージなどに利用でき、Deep-sleepからのRTC boot時などに利用できます。SLOWメモリはDeep-sleep中にコプロセッサのほうから利用されます。
+</p>
+<p>
+また、ESP32は以下のような動作モードを持っています。
+</p>
+<ul><li>active mode
+<ul><li>無線機能ON。チップは受信送信待機が可能。
+</li></ul></li></ul><ul><li>modem-sleep mode
+<ul><li>CPUは動作し、かつクロックは設定可能。WiFiやBluetoothベースバンドは無効。
+</li></ul></li></ul><ul><li>light-sleep mode
+<ul><li>CPUは動作を一時停止。RTCメモリとRTC周辺機器つまりULPコプロセッサは動作。全Wake-upイベントが有効。(MAC, Host, RTCタイマ, 外部割り込み)
+</li></ul></li></ul><ul><li>deep-sleep mode
+<ul><li>RTCメモリとRTC周辺機器のみ動作。WiFiやBluetoothの接続情報はRTCメモリに保存。ULPコプロセッサは動作可能。
+</li></ul></li></ul><p>
+ 
+</p>
+<ul><li>hibernation mode
+<ul><li>内部8MHz発振子とULPコプロセッサも動作停止。RTCリカバリメモリの電源OFF。低速なRTCタイマーと一部のRTC GPIOのみ有効。RTCタイマーもしくはRTC GPIOはHibernation Modeからの復帰に利用可能。
+</li></ul></li></ul><p>
+RTC用のシステムクロックは5種類のソースから選ぶことができます。
+</p>
+<ul><li>外部低速(32 kHz)水晶発振子
+</li><li>外部推奨発信器の4分周
+</li><li>内蔵RC発振器(150kHz Typ. アジャスタブル)
+</li><li>内蔵8MHz発振器
+</li><li>内蔵31.25kHz(内蔵8MHzの256分周)
+</li></ul><p>
+ここで、チップが通常動作していて、高速なCPUアクセスが必要な場合、アプリケーションは外部の高速なクリスタルの4分周もしくは内部8MHzを動作に利用可能です。
+一方で、チップがlow-powerモードで動作している場合、アプリケーションは外部低速水晶発振器(32kHz)か内部RCクロックか内部31.25kHzを選択可能です。
+</p>
+<p>
+背面(以下の画像)部のクリスタルパッドは、この外部用32KHzを接続する用に設計されています。
+詳しくは、<a class="ext-link" href="http://espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf"><span class="icon">​</span>ハードウェアデザインガイドライン</a>の3.1.4.2をご覧ください。
+</p>
+<p>
+<a style="padding:0; border:none" href="https://trac.switch-science.com/attachment/wiki/esp32_tips/32kxtal.jpg"><img src="./esp32_tips – スイッチサイエンス_files/32kxtal.jpg"></a>
+</p>
+<h4 id="サンプルスケッチ9">サンプルスケッチ<a class="anchor" href="https://trac.switch-science.com/wiki/esp32_tips#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B9%E3%82%B1%E3%83%83%E3%83%819" title="このセクションににリンクする"> ¶</a></h4>
+<p>
+<a class="ext-link" href="https://github.com/espressif/esp-idf/tree/master/examples/system/ulp"><span class="icon">​</span>esp-idfのサンプルプログラム</a>をご覧ください。
+</p>
+</div>
+          
+          <div class="trac-modifiedby">
+            <span><a href="https://trac.switch-science.com/wiki/esp32_tips?action=diff&amp;version=31" title="バージョン 31 更新者 Shinichi Ohki">最終更新</a> <a class="timeline" href="https://trac.switch-science.com/timeline?from=2019-06-28T19%3A29%3A51%2B09%3A00&amp;precision=second" title="タイムラインで2019/06/28 19:29:51を見る">8週前</a></span>
+            <span class="trac-print">最終更新 2019/06/28 19:29:51</span>
+          </div>
+        
+        
+      </div>
+      
+    <div id="attachments" class="collapsed">
+        <h3 class="foldable"><a id="no1" href="https://trac.switch-science.com/wiki/esp32_tips#no1">添付ファイル <span class="trac-count">(7)</span></a></h3>
+        <div>
+          <ul>
+            <li>
+    <a href="https://trac.switch-science.com/attachment/wiki/esp32_tips/hall.png" title="添付ファイルを表示">hall.png</a><a href="./esp32_tips – スイッチサイエンス_files/hall.png" class="trac-rawlink" title="ダウンロード">​</a> (<span title="79834 B">78.0 KB</span>) - <span class="trac-author">kishida</span> が<a class="timeline" href="https://trac.switch-science.com/timeline?from=2017-07-15T17%3A29%3A35%2B09%3A00&amp;precision=second" title="タイムラインで2017/07/15 17:29:35を見る">2年前</a>に追加。
+            </li><li>
+    <a href="https://trac.switch-science.com/attachment/wiki/esp32_tips/pinout_v0_1.png" title="添付ファイルを表示">pinout_v0_1.png</a><a href="https://trac.switch-science.com/raw-attachment/wiki/esp32_tips/pinout_v0_1.png" class="trac-rawlink" title="ダウンロード">​</a> (<span title="102548 B">100.1 KB</span>) - <span class="trac-author">kishida</span> が<a class="timeline" href="https://trac.switch-science.com/timeline?from=2017-08-30T00%3A15%3A49%2B09%3A00&amp;precision=second" title="タイムラインで2017/08/30 0:15:49を見る">2年前</a>に追加。
+            </li><li>
+    <a href="https://trac.switch-science.com/attachment/wiki/esp32_tips/pinout_v0_1.pdf" title="添付ファイルを表示">pinout_v0_1.pdf</a><a href="https://trac.switch-science.com/raw-attachment/wiki/esp32_tips/pinout_v0_1.pdf" class="trac-rawlink" title="ダウンロード">​</a> (<span title="109008 B">106.5 KB</span>) - <span class="trac-author">kishida</span> が<a class="timeline" href="https://trac.switch-science.com/timeline?from=2017-08-30T00%3A15%3A55%2B09%3A00&amp;precision=second" title="タイムラインで2017/08/30 0:15:55を見る">2年前</a>に追加。
+            </li><li>
+    <a href="https://trac.switch-science.com/attachment/wiki/esp32_tips/32kxtal.jpg" title="添付ファイルを表示">32kxtal.jpg</a><a href="./esp32_tips – スイッチサイエンス_files/32kxtal.jpg" class="trac-rawlink" title="ダウンロード">​</a> (<span title="67357 B">65.8 KB</span>) - <span class="trac-author">kishida</span> が<a class="timeline" href="https://trac.switch-science.com/timeline?from=2017-10-25T22%3A54%3A31%2B09%3A00&amp;precision=second" title="タイムラインで2017/10/25 22:54:31を見る">22ヵ月前</a>に追加。
+            </li><li>
+    <a href="https://trac.switch-science.com/attachment/wiki/esp32_tips/3210_1.JPG" title="添付ファイルを表示">3210_1.JPG</a><a href="./esp32_tips – スイッチサイエンス_files/3210_1.JPG" class="trac-rawlink" title="ダウンロード">​</a> (<span title="41486 B">40.5 KB</span>) - <span class="trac-author">kishida</span> が<a class="timeline" href="https://trac.switch-science.com/timeline?from=2017-10-25T22%3A54%3A35%2B09%3A00&amp;precision=second" title="タイムラインで2017/10/25 22:54:35を見る">22ヵ月前</a>に追加。
+            </li><li>
+    <a href="https://trac.switch-science.com/attachment/wiki/esp32_tips/pinout_v0_2.pdf" title="添付ファイルを表示">pinout_v0_2.pdf</a><a href="https://trac.switch-science.com/raw-attachment/wiki/esp32_tips/pinout_v0_2.pdf" class="trac-rawlink" title="ダウンロード">​</a> (<span title="370955 B">362.3 KB</span>) - <span class="trac-author">kishida</span> が<a class="timeline" href="https://trac.switch-science.com/timeline?from=2017-11-04T22%3A43%3A48%2B09%3A00&amp;precision=second" title="タイムラインで2017/11/04 22:43:48を見る">22ヵ月前</a>に追加。
+            </li><li>
+    <a href="https://trac.switch-science.com/attachment/wiki/esp32_tips/pinout_v0_2.png" title="添付ファイルを表示">pinout_v0_2.png</a><a href="./esp32_tips – スイッチサイエンス_files/pinout_v0_2.png" class="trac-rawlink" title="ダウンロード">​</a> (<span title="105060 B">102.6 KB</span>) - <span class="trac-author">kishida</span> が<a class="timeline" href="https://trac.switch-science.com/timeline?from=2017-11-04T22%3A44%3A00%2B09%3A00&amp;precision=second" title="タイムラインで2017/11/04 22:44:00を見る">22ヵ月前</a>に追加。
+            </li>
+          </ul>
+          <p>
+            すべての添付ファイルをダウンロード: <a rel="nofollow" href="https://trac.switch-science.com/zip-attachment/wiki/esp32_tips/">.zip</a>
+          </p>
+        </div>
+    </div>
+
+    </div>
+    <div id="altlinks">
+      <h3>他のフォーマットでダウンロード:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="https://trac.switch-science.com/wiki/esp32_tips?format=txt">プレーンテキスト</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr>
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="./esp32_tips – スイッチサイエンス_files/trac_logo_mini.png" height="30" width="107" alt="Trac Powered"></a>
+      <p class="left">Powered by <a href="https://trac.switch-science.com/about"><strong>Trac 1.2.2</strong></a><br>
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">スイッチサイエンス・ウェブショップ<br><a href="http://www.switch-science.com/">http://www.switch-science.com/</a></p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-4499733-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+</body></html>
