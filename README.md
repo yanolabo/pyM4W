@@ -30,12 +30,15 @@ https://www.espressif.com/en/support/download/other-tools
 ----------------------
 
 PCとマイコンをシリアルケーブルで接続する。
-pl2303 搭載のシリアルケーブルを利用する。(Windows の場合はドライバが必要）
+pl2303 搭載のシリアルケーブルを利用する。
+Windows の場合はドライバが必要。Windows 8/10は本家でサポートを停止。
+下記を参照してWindows にパッチを当てるとインストールできる。
+http://www.ifamilysoftware.com/news37.html
 
 
 シリアル通信用プログラムとして、
-Windows では TeraTerm や putty が利用できる。
 Linux や Mac では picocom や screen が利用できる。
+Windows では TeraTerm や putty が利用できる。
 通信速度は 115200bps である。
 
 正しく接続した状態で、SW1を押しながら Reset すると
@@ -49,4 +52,11 @@ Download モードにした状態でシリアル通信を終了する。
 ファームウェアの準備と書き込み
 ------------------------------
 
-esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART write_flash -z 0x1000 esp32-20171007-v1.9.2-276-ga9517c04.bin
+MAC
+`esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART write_flash -z 0x1000 esp32-20YYMMDD-vV.V.V.bin`
+
+Linux
+`esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 esp32-20YYMMDD-vV.V.V.bin`
+
+Windows
+Flash Download Tools の GUI 画面にて
