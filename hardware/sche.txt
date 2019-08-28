@@ -1,28 +1,28 @@
 ESP32
 
 === basic IO ===
-IO00.i  SW1
-IO04.i  SW2
-IO16.i  SW3
+IO00.i  SW1  OK
+IO04.i  SW2  OK
+IO16.i  SW3  OK
 
-IO17.o  LED1
-IO05.o  LED2
+IO17.o  LED1  OK
+IO05.o  LED2  OK
 
 === MOTOR ===
 IO15.o  MTR
-IO02.o  BRK
-IO23.p  PULSE(50% 100k)
+IO02.o  BRK                NG. system failure:: 下の昇圧回路が動かないため
+IO23.p  PULSE(50% 100k)    NG. parts failure:: BAT54S に BAT54C が付いている
 
 === SPEAKER ===
-IO25.o  PTZ
+IO25.o  PTZ  OK
 
 === I2C ===
 IO21.i  SDA
 IO22.i  SCL
 
 === Analog ===
-IO34.a  vLiPo
-IO35.a  vAAx2
+IO34.a  vLiPo  NG. parts failure:: 1/5 (正確には82%)に分圧され 3.99v で飽和
+IO35.a  vAAx2  OK  3.21V( x0.175 11db 0-4095) -> 581
 IO36.a  SENSOR1 .. SENSOR_VP
 IO39.a  SENSOR2 .. SENSOR_VN
 
