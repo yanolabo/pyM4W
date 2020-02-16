@@ -44,7 +44,8 @@ good example with esp32_lp
 -----------------------------
 
 https://github.com/ThomasWaldmann/py-esp32-ulp/blob/master/examples/counter.py
-```
+
+```python
 """
 Very basic example showing data exchange main CPU <--> ULP coprocessor.
 To show that the ULP is doing something, it just increments the value <data>.
