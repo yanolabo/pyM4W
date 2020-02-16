@@ -11,7 +11,8 @@ s.bind((HOST, PORT))
 
 while True:
     msg, addr = s.recvfrom(8192)           # データ受信
-    print(f"{addr}:{msg}")
+    #print(f"{addr}:{msg}")
+    print(msg.decode("utf-8"))
 
 # socket 終了
 s.close()

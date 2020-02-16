@@ -107,4 +107,3 @@ def stopAP():
 
 # "ssidlist"ファイルにある WiFi基地局に接続します。
 # ip = connectWifi()
-
