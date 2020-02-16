@@ -16,8 +16,10 @@ sens1.atten(ADC.ATTN_6DB)
 sens1.width(ADC.WIDTH_10BIT)
 
 import wifi
-wifi.connectWifi()
+ip = wifi.connectWifi()
 
+import uftpd
+print("FTP server :: ftp://{}/".format(ip[0]))
 
 import os
 
