@@ -25,11 +25,15 @@ imu = mpu6050.imu(i2c)
 import wifi
 ip = wifi.connectWifi()
 
-import utelnetd
-utelnetd.start()
-
 import uftpd
 print("FTP server :: ftp://{}/".format(ip[0]) )
+
+# import utelnetd
+# utelnetd.start()
+
+import udp_sendmsg
+udp = udp_sendmsg.udpsend()
+udp.msg("start")
 
 import os
 

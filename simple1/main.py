@@ -1,4 +1,5 @@
 import time
+import machine
 
 def main():
     course = select_course()-1
@@ -12,7 +13,7 @@ def wait_gz_more(val, stat="occer"):
     while True:
         imuval = imu.get_values()
         gz = imuval["GyZ"]
-        print(gz,val, "more")
+        udp.msg("{} {} more".format(gz,val))
         if gz<val:
             continue
         if stat != "keep":
@@ -24,7 +25,7 @@ def wait_gz_more(val, stat="occer"):
     while True:
         imuval = imu.get_values()
         gz = imuval["GyZ"]
-        print(gz,val, "more", "keep")
+        udp.msg("{} {} more keep".format(gz,val))
         if gz>val:
             continue
         break
@@ -35,7 +36,7 @@ def wait_gz_less(val, stat="occer"):
     while True:
         imuval = imu.get_values()
         gz = imuval["GyZ"]
-        print(gz,val, "less")
+        udp.msg("{} {} less".format(gz,val))
         if gz>val:
             continue
         if stat != "keep":
@@ -47,11 +48,16 @@ def wait_gz_less(val, stat="occer"):
     while True:
         imuval = imu.get_values()
         gz = imuval["GyZ"]
-        print(gz,val, "less", "keep")
+        udp.msg("{} {} less keep".format(gz,val))
         if gz<val:
             continue
         break
     return
+
+
+def end():
+    time.sleep(2)
+    machine.reset()
 
 
 def run( c ):
@@ -63,8 +69,8 @@ def run( c ):
         wait_gz_more(1000, "keep")
         mtr.val(0)
 
-        while True:
-            pass
+        end()
+
     elif c == 1:
         pass
     elif c == 2:
@@ -104,18 +110,18 @@ def getkey(wait):
 def select_course():
 
     while True:
-        print("wait course selection")
+        udp.msg("wait course selection")
         sel = getkey(250)
-        print("Selected course : ", sel)
+        udp.msg("Selected course : {}".format(sel))
 
         time.sleep_ms(500)
 
-        print("wait confirmation")
+        udp.msg("wait confirmation")
         if getkey(100) != 3:
             print("Confirmed..")
             break
 
-        print("CANCEL")
+        udp.msg("CANCEL")
 
     return sel
 
