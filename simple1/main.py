@@ -6,15 +6,27 @@ def main():
     for x in range(3):
         course = run( course )
 
+
+def gz_more(val, stat):
+    while True:
+        imuval = imu.get_values()
+        gz = imuval["GyZ"]
+
+        print(gz)
+
+
+
 def run( c ):
 
     if c == 0:
+        wait_event("", "")
         pass
     elif c == 1:
         pass
     elif c == 2:
         pass
 
+    next_c = 0
     time.sleep(1)
     return next_c
 
