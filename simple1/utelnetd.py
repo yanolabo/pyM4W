@@ -2,12 +2,13 @@ import socket
 import network
 import uos
 import errno
+import io
 
 last_client_socket = None
 server_socket = None
 
 # Provide necessary functions for dupterm and replace telnet control characters that come in.
-class TelnetWrapper():
+class TelnetWrapper(io.IOBase):
     def __init__(self, socket):
         self.socket = socket
         self.discard_count = 0
