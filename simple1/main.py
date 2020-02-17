@@ -7,20 +7,64 @@ def main():
         course = run( course )
 
 
-def gz_more(val, stat):
+def wait_gz_more(val, stat="occer"):
+
     while True:
         imuval = imu.get_values()
         gz = imuval["GyZ"]
+        print(gz,val, "more")
+        if gz<val:
+            continue
+        if stat != "keep":
+            # 検出時点で終了
+            return
+        break
 
-        print(gz)
+    # 継続確認
+    while True:
+        imuval = imu.get_values()
+        gz = imuval["GyZ"]
+        print(gz,val, "more", "keep")
+        if gz>val:
+            continue
+        break
+    return
 
+def wait_gz_less(val, stat="occer"):
+
+    while True:
+        imuval = imu.get_values()
+        gz = imuval["GyZ"]
+        print(gz,val, "less")
+        if gz>val:
+            continue
+        if stat != "keep":
+            # 検出時点で終了
+            return
+        break
+
+    # 継続確認
+    while True:
+        imuval = imu.get_values()
+        gz = imuval["GyZ"]
+        print(gz,val, "less", "keep")
+        if gz<val:
+            continue
+        break
+    return
 
 
 def run( c ):
 
     if c == 0:
-        wait_event("", "")
-        pass
+        mtr.val(20)
+        wait_gz_more(1000, "keep")
+        time.sleep_ms(1020)
+        wait_gz_more(1000, "keep")
+        mtr.val(0)
+
+        while True:
+            pass
     elif c == 1:
         pass
     elif c == 2:
@@ -53,6 +97,7 @@ def getkey(wait):
         if v == 0:
             break
 
+    time.sleep(1)
     return sel
 
 
